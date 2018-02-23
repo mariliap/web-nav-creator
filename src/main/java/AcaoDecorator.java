@@ -1,5 +1,3 @@
-package main.java;
-
 /**
  * Created by Marilia on 07/02/2018.
  */
@@ -15,5 +13,10 @@ public class AcaoDecorator extends Acao{
     @Override
     public void executarOperacaoPrincipal() {
         this.ultimaAcaoD.executarOperacaoPrincipal();
+    }
+
+    @Override
+    public Acao accept(AcaoVisitor av) {
+        return this.ultimaAcaoD.accept(av);
     }
 }

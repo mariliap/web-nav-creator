@@ -1,5 +1,3 @@
-package main.java;
-
 /**
  * Created by Marilia on 07/02/2018.
  */
@@ -12,7 +10,7 @@ public class AcaoEsperaVisibilidadeDecorator extends AcaoDecorator {
     @Override
     public void executarOperacaoPrincipal() {
 
-        System.out.print("AcaoEsperaVisibilidadeDecorator > ");
+        System.out.print("\nAcaoEsperaVisibilidadeDecorator > ");
         super.executarOperacaoPrincipal();
     }
 }

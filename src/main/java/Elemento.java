@@ -1,5 +1,3 @@
-package main.java;
-
 /**
  * Created by Marilia on 07/02/2018.
  */
@@ -22,7 +20,7 @@ public class Elemento {
         //} else {
         //    return original;
         //}
-        return null;
+        return original;
     }
 
 }

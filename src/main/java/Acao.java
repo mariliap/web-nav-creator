@@ -1,5 +1,3 @@
-package main.java;
-
 /**
  * Created by Marilia on 07/02/2018.
  */
@@ -30,7 +28,7 @@ public abstract class Acao {
     }
 
     public Acao construir(){
-        return this.elemento.decorarAcao(this);
+       return this.elemento.getPagina().decorY(this);
     }
 
     public void adicionar(Acao acao) {
@@ -51,4 +49,6 @@ public abstract class Acao {
     }
 
     protected abstract void executarOperacaoPrincipal();
+
+    public abstract Acao accept(AcaoVisitor av);
 }

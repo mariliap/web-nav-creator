@@ -3,7 +3,7 @@ import java.util.List;
 /**
  * Created by Marilia on 07/02/2018.
  */
-public class PaginaEdicaoParceiro extends Pagina{
+public class PaginaGenerica extends Pagina{
 
     private List<Elemento> elementos;
 
@@ -12,7 +12,7 @@ public class PaginaEdicaoParceiro extends Pagina{
     }
 
     public Acao decorarAcao(AcaoClicarBotao original){
-        return new AcaoEsperaVisibilidadeDecorator(original);
+        return original;
     }
 
     public Acao decorarAcao(AcaoPreencherCampo original){
