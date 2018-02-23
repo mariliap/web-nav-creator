@@ -1,6 +1,7 @@
 package paginas;
 
 import acoesBasics.*;
+import elementos.Elemento;
 
 import java.util.List;
 

@@ -1,12 +1,14 @@
 package acoesBasics;
 
+import acoesVisitors.AcaoVisitor;
+
 /**
  * Created by Marilia on 25/01/2018.
  */
 public class AcaoValidarInformacao extends Acao {
 
     @Override
-    protected void executarOperacaoPrincipal() {
+    public void executarOperacaoPrincipal() {
         System.out.print("\nAcaoValidarInformacao > ");
         //super.executar();
     }

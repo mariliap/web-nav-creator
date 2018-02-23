@@ -1,6 +1,7 @@
 package acoesDecorators;
 
 import acoesBasics.Acao;
+import acoesVisitors.AcaoVisitor;
 
 /**
  * Created by Marilia on 07/02/2018.

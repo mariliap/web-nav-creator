@@ -1,12 +1,14 @@
 package acoesBasics;
 
+import acoesVisitors.AcaoVisitor;
+
 /**
  * Created by Marilia on 07/02/2018.
  */
 public class AcaoClicarBotao extends Acao {
 
     @Override
-    protected void executarOperacaoPrincipal() {
+    public void executarOperacaoPrincipal() {
         System.out.print("\nAcaoClicarBotao > ");
         //super.executar();
     }

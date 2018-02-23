@@ -1,12 +1,14 @@
 package acoesBasics;
 
+import acoesVisitors.AcaoVisitor;
+
 /**
  * Created by Marilia on 07/02/2018.
  */
 public class AcaoPreencherCampo extends Acao{
 
     @Override
-    protected void executarOperacaoPrincipal() {
+    public void executarOperacaoPrincipal() {
         System.out.print("\nAcaoPreencherCampo (");
         System.out.print("Verifica existencia do campo, ");
         System.out.print("Verifica visibilidade do campo, ");

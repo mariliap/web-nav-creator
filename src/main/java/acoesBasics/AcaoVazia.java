@@ -1,12 +1,14 @@
 package acoesBasics;
 
+import acoesVisitors.AcaoVisitor;
+
 /**
  * Created by Marilia on 25/01/2018.
  */
 public class AcaoVazia extends Acao {
 
     @Override
-    protected void executarOperacaoPrincipal() {
+    public void executarOperacaoPrincipal() {
         System.out.print("AcaoVazia > ");
         //super.executar();
     }

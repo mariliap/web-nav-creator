@@ -2,6 +2,7 @@ package paginas;
 
 import acoesBasics.*;
 import acoesDecorators.AcaoEsperaVisibilidadeDecorator;
+import elementos.Elemento;
 
 import java.util.List;
 
