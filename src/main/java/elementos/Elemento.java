@@ -10,6 +10,7 @@ public class Elemento {
 
     private Pagina pagina;
     private String xpath;
+    private String nome;
 
     public Pagina getPagina() {
         return pagina;
@@ -17,6 +18,14 @@ public class Elemento {
 
     public void setPagina(Pagina pagina) {
         this.pagina = pagina;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Acao decorarAcao(Acao original){
