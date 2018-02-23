@@ -1,9 +1,14 @@
+package paginas;
+
+import acoesBasics.*;
+import acoesDecorators.AcaoEsperaVisibilidadeDecorator;
+
 import java.util.List;
 
 /**
  * Created by Marilia on 07/02/2018.
  */
-public class PaginaGenerica extends Pagina{
+public class PaginaEdicaoParceiro extends Pagina{
 
     private List<Elemento> elementos;
 
@@ -12,7 +17,7 @@ public class PaginaGenerica extends Pagina{
     }
 
     public Acao decorarAcao(AcaoClicarBotao original){
-        return original;
+        return new AcaoEsperaVisibilidadeDecorator(original);
     }
 
     public Acao decorarAcao(AcaoPreencherCampo original){

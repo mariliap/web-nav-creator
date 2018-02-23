@@ -1,3 +1,8 @@
+package acoesBasics;
+
+import acoesVisitors.AcaoVisitor;
+import elementos.Elemento;
+
 /**
  * Created by Marilia on 07/02/2018.
  */
@@ -48,7 +53,7 @@ public abstract class Acao {
         }
     }
 
-    protected abstract void executarOperacaoPrincipal();
+    public abstract void executarOperacaoPrincipal();
 
     public abstract Acao accept(AcaoVisitor av);
 }

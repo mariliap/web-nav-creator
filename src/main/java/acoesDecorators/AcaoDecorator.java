@@ -1,7 +1,11 @@
+package acoesDecorators;
+
+import acoesBasics.Acao;
+
 /**
  * Created by Marilia on 07/02/2018.
  */
-public class AcaoDecorator extends Acao{
+public class AcaoDecorator extends Acao {
 
     private Acao ultimaAcaoD = null;
 

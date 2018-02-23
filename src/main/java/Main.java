@@ -1,5 +1,11 @@
 
 
+import acoesBasics.*;
+import elementos.Elemento;
+import paginas.Pagina;
+import paginas.PaginaEdicaoParceiro;
+import paginas.PaginaGenerica;
+
 import java.util.ArrayList;
 import java.util.List;
 

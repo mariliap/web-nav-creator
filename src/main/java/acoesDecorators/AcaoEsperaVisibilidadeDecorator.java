@@ -1,3 +1,7 @@
+package acoesDecorators;
+
+import acoesBasics.Acao;
+
 /**
  * Created by Marilia on 07/02/2018.
  */

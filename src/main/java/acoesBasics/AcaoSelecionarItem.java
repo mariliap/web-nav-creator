@@ -1,11 +1,13 @@
+package acoesBasics;
+
 /**
  * Created by Marilia on 25/01/2018.
  */
-public class AcaoValidarInformacao extends Acao {
+public class AcaoSelecionarItem extends Acao {
 
     @Override
     protected void executarOperacaoPrincipal() {
-        System.out.print("\nAcaoValidarInformacao > ");
+        System.out.print("\nAcaoSelecionarItem > ");
         //super.executar();
     }
 
