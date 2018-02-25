@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Marilia on 07/02/2018.
  */
-public class PaginaGenerica extends Pagina{
+public class PaginaGenerica extends PaginaOld {
 
     private List<Elemento> elementos;
 

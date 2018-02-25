@@ -1,15 +1,15 @@
 package paginas;
 
 import acoesBasics.*;
-import acoesVisitors.AcaoConcretaVisitor;
-import acoesVisitors.AcaoVisitor;
+import acoesVisitors.PaginaGenenericaAcoesVisitor;
+import acoesVisitors.AcoesVisitor;
 
 /**
  * Created by Marilia on 07/02/2018.
  */
-public abstract class Pagina {
+public abstract class PaginaOld {
 
-    AcaoVisitor visitor = new AcaoConcretaVisitor();
+    AcoesVisitor visitor = new PaginaGenenericaAcoesVisitor();
 
     public Acao decorY(Acao original){
         //return decorarAcao(original);

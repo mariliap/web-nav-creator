@@ -1,10 +1,15 @@
 package acoesBasics;
 
-import acoesVisitors.AcaoVisitor;
+import acoesVisitors.AcoesVisitor;
+
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
 /**
  * Created by Marilia on 07/02/2018.
  */
+@Entity
+@DiscriminatorValue("AcaoPreencherCampo")
 public class AcaoPreencherCampo extends Acao{
 
     @Override
@@ -21,7 +26,7 @@ public class AcaoPreencherCampo extends Acao{
     }
 
     @Override
-    public Acao accept(AcaoVisitor av) {
+    public Acao accept(AcoesVisitor av) {
         return av.visit(this);
     }
 }

@@ -1,27 +1,27 @@
 package acoesDecorators;
 
 import acoesBasics.Acao;
-import acoesVisitors.AcaoVisitor;
+import acoesVisitors.AcoesVisitor;
 
 /**
  * Created by Marilia on 07/02/2018.
  */
 public class AcaoDecorator extends Acao {
 
-    private Acao ultimaAcaoD = null;
+    private Acao acaoASerIncrementada = null;
 
 
     public AcaoDecorator(Acao acaoDASerIncrementada) {
-        this.ultimaAcaoD = acaoDASerIncrementada;
+        this.acaoASerIncrementada = acaoDASerIncrementada;
     }
 
     @Override
     public void executarOperacaoPrincipal() {
-        this.ultimaAcaoD.executarOperacaoPrincipal();
+        this.acaoASerIncrementada.executarOperacaoPrincipal();
     }
 
     @Override
-    public Acao accept(AcaoVisitor av) {
-        return this.ultimaAcaoD.accept(av);
+    public Acao accept(AcoesVisitor av) {
+        return this.acaoASerIncrementada.accept(av);
     }
 }

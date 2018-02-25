@@ -1,23 +1,35 @@
 package elementos;
 
 import acoesBasics.Acao;
-import paginas.Pagina;
+import acoesVisitors.PaginaAcoesVisitor;
+import commons.GenericEntity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 /**
  * Created by Marilia on 07/02/2018.
  */
-public class Elemento {
+@Entity
+public class Elemento extends GenericEntity {
 
-    private Pagina pagina;
+    //private PaginaOld pagina;
+    @Column
     private String xpath;
+
+    @Column
     private String nome;
 
-    public Pagina getPagina() {
-        return pagina;
+    @ManyToOne //@MapsId
+    private PaginaAcoesVisitor visitor;// = new PaginaGenenericaAcoesVisitor();
+
+    public PaginaAcoesVisitor getVisitor() {
+        return visitor;
     }
 
-    public void setPagina(Pagina pagina) {
-        this.pagina = pagina;
+    public void setVisitor(PaginaAcoesVisitor visitor) {
+        this.visitor = visitor;
     }
 
     public String getNome() {
@@ -28,13 +40,9 @@ public class Elemento {
         this.nome = nome;
     }
 
-    public Acao decorarAcao(Acao original){
-        //if(original instanceof AcaoClicarBotao && pagina.existePainelProcessamento()) {
-        //    return new AcaoEsperaVisibilidadeDecorator(original);
-        //} else {
-        //    return original;
-        //}
-        return original;
+    public Acao decorar(Acao original){
+        return original.accept(visitor);
+        //return original;
     }
 
 }

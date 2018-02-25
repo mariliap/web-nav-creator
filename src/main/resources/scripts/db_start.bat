@@ -1,0 +1,1 @@
+java -cp "C:/Users/Marilia/.IntelliJIdea15/config/jdbc-drivers/hsqldb-2.4.0.jar" org.hsqldb.Server -database.0 file:D:/Workspaces/WorkspaceIDEA_PC/web-nav-creator/target/database/web-nav-creator-db -dbname.0 web-nav-creator

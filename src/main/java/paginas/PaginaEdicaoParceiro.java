@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Marilia on 07/02/2018.
  */
-public class PaginaEdicaoParceiro extends Pagina{
+public class PaginaEdicaoParceiro extends PaginaOld {
 
     private List<Elemento> elementos;
 

@@ -1,7 +1,10 @@
 package acoesBasics;
 
-import acoesVisitors.AcaoVisitor;
+import acoesVisitors.VisitableAcao;
+import commons.GenericEntity;
 import elementos.Elemento;
+
+import javax.persistence.*;
 
 /**
  * Created by Marilia on 07/02/2018.
@@ -18,10 +21,15 @@ import elementos.Elemento;
 //        @Type(value = AcaoPreencherCampo.class, name = "preencherCampo"),
 //        @Type(value = AcaoSelecionarItem.class, name = "selecionarItem")
 //})
-//@Entity
-public abstract class Acao {
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "Acao_Type")
+public abstract class Acao extends GenericEntity implements VisitableAcao{
 
+    @ManyToOne
     private Elemento elemento;
+
+    @Transient
     private Acao proxima;
 
     public Elemento getElemento() {
@@ -33,7 +41,8 @@ public abstract class Acao {
     }
 
     public Acao construir(){
-       return this.elemento.getPagina().decorY(this);
+//       return this.elemento.getPagina().decorY(this);
+        return this.elemento.decorar(this);
     }
 
     public void adicionar(Acao acao) {
@@ -55,5 +64,4 @@ public abstract class Acao {
 
     public abstract void executarOperacaoPrincipal();
 
-    public abstract Acao accept(AcaoVisitor av);
 }
