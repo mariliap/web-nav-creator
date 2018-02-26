@@ -4,13 +4,63 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>criador-casos-testes</groupId>
-    <artifactId>criador-casos-testes</artifactId>
+    <groupId>web-navigation</groupId>
+    <artifactId>web-nav-creator</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <!-- Encoding -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Format used to show the build timestamp in both the version.properties
+            file and .jar distribution file -->
+        <maven.build.timestamp.format>yyyy-MM-dd[HH.mm]</maven.build.timestamp.format>
+        <timestamp>${maven.build.timestamp}</timestamp>
+    </properties>
 
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
+        <!--<finalName>${project.artifactId}-${project.version}(build${maven.build.timestamp})</finalName>-->
+        <finalName>${project.artifactId}-${project.version}</finalName>
+        <resources>
+            <resource>
+                <directory>src</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                    <exclude>*.png</exclude>
+                </excludes>
+                <!-- Filtering will check if existing resource files have references
+                    to properties. Then, replaces the property name with its actual value (see
+                    property timestamp) -->
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>appassembler-maven-plugin</artifactId>
+                    <version>1.1.1</version>
+                    <configuration>
+                        <copyConfigurationDirectory>false</copyConfigurationDirectory>
+                        <configurationDirectory>etc</configurationDirectory>
+                        <repositoryName>lib</repositoryName>
+                        <repositoryLayout>flat</repositoryLayout>
+                        <assembleDirectory>${project.build.directory}/assembly</assembleDirectory>
+                        <programs>
+                            <program>
+                                <mainClass>LocalServer</mainClass>
+                                <name>web-nav-creator</name>
+                            </program>
+                        </programs>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
     </build>
+
+
 
     <dependencies>
         <dependency>
@@ -22,6 +72,27 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>5.2.2.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-webapp</artifactId>
+            <version>9.4.1.v20170120</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet</artifactId>
+            <version>2.23.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.ext.cdi</groupId>
+            <artifactId>jersey-cdi1x</artifactId>
+            <version>2.23.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>2.23.2</version>
         </dependency>
     </dependencies>
 </project>

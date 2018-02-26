@@ -1,6 +1,9 @@
 package acoesBasics;
 
 import acoesVisitors.VisitableAcao;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import commons.GenericEntity;
 import elementos.Elemento;
 
@@ -11,16 +14,16 @@ import javax.persistence.*;
  */
 //http://www.baeldung.com/jackson-inheritance
 
-//@JsonTypeInfo(
-//        use = JsonTypeInfo.Id.NAME,
-//        include = JsonTypeInfo.As.PROPERTY,
-//        property = "type")
-//@JsonSubTypes({
-//        @Type(value = AcaoClicarBotao.class, name = "clicarBotao"),
-//        @Type(value = AcaoValidarInformacao.class, name = "validarInformacao"),
-//        @Type(value = AcaoPreencherCampo.class, name = "preencherCampo"),
-//        @Type(value = AcaoSelecionarItem.class, name = "selecionarItem")
-//})
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
+@JsonSubTypes({
+        @Type(value = AcaoClicarBotao.class, name = "clicarBotao"),
+        @Type(value = AcaoValidarInformacao.class, name = "validarInformacao"),
+        @Type(value = AcaoPreencherCampo.class, name = "preencherCampo"),
+        @Type(value = AcaoSelecionarItem.class, name = "selecionarItem")
+})
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "Acao_Type")
