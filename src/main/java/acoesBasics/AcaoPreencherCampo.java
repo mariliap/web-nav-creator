@@ -1,6 +1,7 @@
 package acoesBasics;
 
 import acoesVisitors.AcoesVisitor;
+import org.openqa.selenium.By;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -23,6 +24,10 @@ public class AcaoPreencherCampo extends Acao{
         System.out.print("Espera tela de processando da página atual sumir");//opcional
         System.out.print(") >");
         //super.executar();
+
+        if(getDriver()!=null) {
+            getDriver().findElement(By.xpath(getElemento().getXpath())).sendKeys(getElemento().getDescription());
+        }
     }
 
     @Override

@@ -24,4 +24,12 @@ public class AcaoDecorator extends Acao {
     public Acao accept(AcoesVisitor av) {
         return this.acaoASerIncrementada.accept(av);
     }
+
+    protected Acao getAcaoASerIncrementada() {
+        return acaoASerIncrementada;
+    }
+
+    protected void setAcaoASerIncrementada(Acao acaoASerIncrementada) {
+        this.acaoASerIncrementada = acaoASerIncrementada;
+    }
 }

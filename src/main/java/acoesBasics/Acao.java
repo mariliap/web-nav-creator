@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import commons.GenericEntity;
 import elementos.Elemento;
+import org.openqa.selenium.WebDriver;
 
 import javax.persistence.*;
 
@@ -22,7 +23,8 @@ import javax.persistence.*;
         @Type(value = AcaoClicarBotao.class, name = "clicarBotao"),
         @Type(value = AcaoValidarInformacao.class, name = "validarInformacao"),
         @Type(value = AcaoPreencherCampo.class, name = "preencherCampo"),
-        @Type(value = AcaoSelecionarItem.class, name = "selecionarItem")
+        @Type(value = AcaoSelecionarItem.class, name = "selecionarItem"),
+        @Type(value = AcaoIrPara.class, name = "irPara")
 })
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -35,12 +37,25 @@ public abstract class Acao extends GenericEntity implements VisitableAcao{
     @Transient
     private Acao proxima;
 
+    @Transient
+    private WebDriver driver;
+
+    public abstract void executarOperacaoPrincipal();
+
     public Elemento getElemento() {
         return elemento;
     }
 
     public void setElemento(Elemento elemento) {
         this.elemento = elemento;
+    }
+
+    public WebDriver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(WebDriver driver) {
+        this.driver = driver;
     }
 
     public Acao construir(){
@@ -65,6 +80,6 @@ public abstract class Acao extends GenericEntity implements VisitableAcao{
         }
     }
 
-    public abstract void executarOperacaoPrincipal();
+
 
 }

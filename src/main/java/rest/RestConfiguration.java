@@ -30,5 +30,6 @@ public class RestConfiguration extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(JacksonFeature.class);
         resources.add(ExecucaoResource.class);
+        resources.add(VersionUpdateResource.class);
     }
 }

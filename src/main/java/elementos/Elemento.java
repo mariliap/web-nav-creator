@@ -40,6 +40,14 @@ public class Elemento extends GenericEntity {
         this.nome = nome;
     }
 
+    public String getXpath() {
+        return xpath;
+    }
+
+    public void setXpath(String xpath) {
+        this.xpath = xpath;
+    }
+
     public Acao decorar(Acao original){
         return original.accept(visitor);
         //return original;

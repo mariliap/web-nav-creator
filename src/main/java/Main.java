@@ -6,7 +6,12 @@ import elementos.Elemento;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.List;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.URI;
+import java.util.*;
 
 /**
  * Created by Marilia on 07/02/2018.
@@ -16,34 +21,117 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Hello World!");
 
-//        List<AcaoD> listaAcoes = new ArrayList<>();
-//        AcaoD acaoD = new AcaoDVazia();
-//        listaAcoes.adicionar(acaoD);
+        //initServer();
 
-//        acaoD = new AcaoPreencherCampoDecorator(acaoD);
-//        acaoD.executar();
-//
-//        acaoD = new ChainResponsability.AcaoEsperaVisibilidadeDecorator(acaoD);
-//        acaoD.executar();
-//
-//        acaoD = new AcaoValidarInformacaoDecorator(acaoD);
-//        acaoD.executar();
-
-//        acaoD = acaoD.compor(new AcaoPreencherCampoDecorator());
-//
-//        acaoD = acaoD.compor(new ChainResponsability.AcaoEsperaVisibilidadeDecorator());
-//
-//        acaoD = acaoD.compor(new AcaoValidarInformacaoDecorator());
-//
-//        acaoD.executar();
+        ChromeTest.setupClass();
+        ChromeTest test = new ChromeTest();
+        test.setupTest();
+        test.test();
+        test.teardown();
 
 
-//        Acao acaoX = new AcaoPreencherCampo();
-//        acaoX.adicionar(new AcaoClicarBotao());
-//        acaoX.adicionar(new AcaoSelecionarItem());
-//        acaoX.adicionar(new AcaoValidarInformacao());
-//        acaoX.executar();
 
+        //initFrameworkMockText();
+    }
+
+    public static void initServer(){
+        try{
+            Properties properties = new Properties();
+            properties.load(UpdateApp.class.getResourceAsStream("/main/resources/server.properties"));
+
+            initMockRemoteServer(properties);
+
+            UpdateApp updateApp = new UpdateApp();
+            if(!updateApp.isNewVersionAvailable()) {
+
+                String localAddress = properties.getProperty("localAddress");
+                int localPort = Integer.parseInt(properties.getProperty("localPort"));
+
+                LocalServer main = new LocalServer();
+                main.start(localAddress, localPort);
+
+                displayTrayIcon(localPort, main.getServerWebContextPath());
+
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().browse(new URI(String.format("%s://%s:%d/ui", "http", localAddress, localPort)));
+                    Desktop.getDesktop().browse(new URI(String.format("%s://%s:%d/rest/execucao", "http", localAddress, localPort)));
+                }
+
+                //main.waitForInterrupt();
+            } else {
+                UpdateApp.initUpdate();
+            }
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    private static void initMockRemoteServer(Properties properties) throws Exception {
+        String remoteAddress = properties.getProperty("remoteAddress");
+        int remotePort = Integer.parseInt(properties.getProperty("remotePort"));
+        if(remoteAddress!= null && !remoteAddress.trim().isEmpty()
+                && remoteAddress.equals("localhost")) {
+            LocalServer remote = new LocalServer();
+            remote.start(remoteAddress, remotePort);
+        }
+    }
+
+    private static void displayTrayIcon(final int port, final String webAppContextPath) throws Exception {
+
+        if (!GraphicsEnvironment.isHeadless()) {
+            final TrayIcon trayIcon =
+                    new TrayIcon(new ImageIcon(Main.class.getResource("/images/pf.png")).getImage());
+            trayIcon.setImageAutoSize(true);
+            trayIcon.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent ev) {
+                    try {
+                        Desktop.getDesktop().browse(new URI("http://localhost:" + port));
+                    } catch (Exception e) {
+                    }
+                }
+            });
+            PopupMenu popup = new PopupMenu();
+            MenuItem browseAction = new MenuItem("Navegar");
+            browseAction.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        Desktop.getDesktop().browse(new URI("http://localhost:" + port + webAppContextPath));
+                    } catch (Exception ex) {
+                    }
+                }
+            });
+            MenuItem quitAction = new MenuItem("Fechar");
+            quitAction.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.exit(0);
+                }
+            });
+            MenuItem updateAction = new MenuItem("Atualizar");
+            quitAction.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    UpdateApp.initUpdate();
+                }
+            });
+
+            popup.add(browseAction);
+            popup.add(quitAction);
+            popup.add(updateAction);
+            trayIcon.setPopupMenu(popup);
+            SystemTray.getSystemTray().add(trayIcon);
+            trayIcon.displayMessage(
+                    "Jetty Embedded Server (http://localhost:" + port + ")",
+                    "Click this icon to open the browser.", TrayIcon.MessageType.INFO);
+        }
+    }
+
+    private static void initFrameworkMockText(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hsqldb");
         EntityManager em = emf.createEntityManager();
 
@@ -58,7 +146,7 @@ public class Main {
         Elemento elemento3 = em.createQuery("SELECT e FROM Elemento e where e.id = 3", Elemento.class).getSingleResult();
         Elemento elemento4 = em.createQuery("SELECT e FROM Elemento e where e.id = 4", Elemento.class).getSingleResult();
 
-        List<Acao> listaAcoes = em.createQuery("SELECT a FROM Acao a", Acao.class).getResultList();
+        java.util.List<Acao> listaAcoes = em.createQuery("SELECT a FROM Acao a", Acao.class).getResultList();
 
         em.close();
         emf.close();
@@ -131,6 +219,5 @@ public class Main {
             teste.adicionar(acao);
         }
         teste.executar();
-
     }
 }

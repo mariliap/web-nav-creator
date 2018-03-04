@@ -9,18 +9,21 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+		<!-- Set Java Version -->
+		<maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
         <!-- Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Format used to show the build timestamp in both the version.properties
-            file and .jar distribution file -->
+             file and .jar distribution file -->
         <maven.build.timestamp.format>yyyy-MM-dd[HH.mm]</maven.build.timestamp.format>
         <timestamp>${maven.build.timestamp}</timestamp>
     </properties>
 
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
-        <!--<finalName>${project.artifactId}-${project.version}(build${maven.build.timestamp})</finalName>-->
-        <finalName>${project.artifactId}-${project.version}</finalName>
+        <finalName>${project.artifactId}-${project.version}(build${maven.build.timestamp})</finalName>
+        <!--<finalName>${project.artifactId}-${project.version}</finalName>-->
         <resources>
             <resource>
                 <directory>src</directory>
@@ -49,7 +52,7 @@
                         <assembleDirectory>${project.build.directory}/assembly</assembleDirectory>
                         <programs>
                             <program>
-                                <mainClass>LocalServer</mainClass>
+                                <mainClass>Main</mainClass>
                                 <name>web-nav-creator</name>
                             </program>
                         </programs>
@@ -93,6 +96,22 @@
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
             <version>2.23.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.24</version>
         </dependency>
     </dependencies>
 </project>

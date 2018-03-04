@@ -1,5 +1,7 @@
 package acoesVisitors;
 
+import acoesBasics.Acao;
+import acoesBasics.AcaoIrPara;
 import commons.GenericEntity;
 import elementos.Elemento;
 
@@ -15,6 +17,10 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "PaginaAcoesVisitor_Type")
 public abstract class PaginaAcoesVisitor extends GenericEntity implements AcoesVisitor{
+
+    public Acao visit(AcaoIrPara acaoOriginal) {
+        return acaoOriginal;
+    }
 
 //    @OneToMany(mappedBy = "visitor")
 //    private List<Elemento> elementos = new ArrayList<Elemento>();

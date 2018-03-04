@@ -9,10 +9,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 import rest.RestConfiguration;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URI;
@@ -31,34 +27,14 @@ public class LocalServer {
     private static final String REST_API_INDEX = "/rest/";
     private static final Logger LOG = Logger.getLogger(Main.class.getName());
 
-    private static int port = 12345;
+    private int address;
+    private int port;// = 12345;
     private Server server;
     private URI serverURI;
 
-    public static void main(String[] args) throws Exception
+    public void start(String address, int port) throws Exception
     {
-        UpdateApp updateApp = new UpdateApp();
-        if(!updateApp.isNewVersionAvailable()) {
-
-            LocalServer main = new LocalServer();
-            main.start();
-
-
-            displayTrayIcon(port, main.getServerWebContextPath());
-
-            if (Desktop.isDesktopSupported()) {
-                Desktop.getDesktop().browse(new URI("http://localhost:"+port+"/ui"));
-                Desktop.getDesktop().browse(new URI("http://localhost:"+port+"/rest/execucao"));
-            }
-
-            main.waitForInterrupt();
-        } else {
-            UpdateApp.initUpdate();
-        }
-    }
-
-    public void start() throws Exception
-    {
+        this.port = port;
         server = new Server();
         ServerConnector connector = connector();
         server.addConnector(connector);
@@ -95,11 +71,11 @@ public class LocalServer {
         //this.serverURI = getServerUri(connector);
 
         LOG.info("REST URI: "
-                + (String.format("%s://%s:%d", "http", "localhost", port)) + restApi.getContextPath()
+                + (String.format("%s://%s:%d", "http", address, port)) + restApi.getContextPath()
         );
 
         LOG.info("WEB APP URI: "
-                + (String.format("%s://%s:%d", "http", "localhost", port))
+                + (String.format("%s://%s:%d", "http", address, port))
                 + webAppContext.getContextPath()
         );
     }
@@ -212,61 +188,5 @@ public class LocalServer {
     {
         server.join();
     }
-
-    private static void displayTrayIcon(final int port, final String webAppContextPath) throws Exception {
-
-        if (!GraphicsEnvironment.isHeadless()) {
-            final TrayIcon trayIcon =
-                    new TrayIcon(new ImageIcon(Main.class.getResource("/images/pf.png")).getImage());
-            trayIcon.setImageAutoSize(true);
-            trayIcon.addActionListener(new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent ev) {
-                    try {
-                        Desktop.getDesktop().browse(new URI("http://localhost:" + port));
-                    } catch (Exception e) {
-                    }
-                }
-            });
-            PopupMenu popup = new PopupMenu();
-            MenuItem browseAction = new MenuItem("Navegar");
-            browseAction.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        Desktop.getDesktop().browse(new URI("http://localhost:" + port + webAppContextPath));
-                    } catch (Exception ex) {
-                    }
-                }
-            });
-            MenuItem quitAction = new MenuItem("Fechar");
-            quitAction.addActionListener(new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    System.exit(0);
-                }
-            });
-            MenuItem updateAction = new MenuItem("Atualizar");
-            quitAction.addActionListener(new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    UpdateApp.initUpdate();
-                }
-            });
-
-            popup.add(browseAction);
-            popup.add(quitAction);
-            popup.add(updateAction);
-            trayIcon.setPopupMenu(popup);
-            SystemTray.getSystemTray().add(trayIcon);
-            trayIcon.displayMessage(
-                    "Jetty Embedded Server (http://localhost:" + port + ")",
-                    "Click this icon to open the browser.", TrayIcon.MessageType.INFO);
-        }
-    }
-
 
 }

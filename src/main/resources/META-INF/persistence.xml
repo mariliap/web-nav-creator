@@ -12,7 +12,6 @@
     <persistence-unit name="hsqldb" transaction-type="RESOURCE_LOCAL">
         <!--<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
         <!--<provider>org.hibernate.ejb.HibernatePersistence</provider>-->
-        <!--<class>research.mpl.backend.todo.ToDoItem</class>-->
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />
             <!--
@@ -21,6 +20,7 @@
            -->
            <property name="javax.persistence.jdbc.url"
                       value="jdbc:hsqldb:hsql://localhost/web-nav-creator;shutdown=true"/>
+
            <property name="javax.persistence.jdbc.user" value="SA" />
            <property name="javax.persistence.jdbc.password" value="" />
 

@@ -15,6 +15,7 @@ public class AcaoEsperaVisibilidadeDecorator extends AcaoDecorator {
     public void executarOperacaoPrincipal() {
 
         System.out.print("\nAcaoEsperaVisibilidadeDecorator > ");
+
         super.executarOperacaoPrincipal();
     }
 }
