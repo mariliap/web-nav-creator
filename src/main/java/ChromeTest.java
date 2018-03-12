@@ -47,18 +47,21 @@ public class ChromeTest {
 
         em.close();
         emf.close();
-
-        Acao teste = new AcaoVazia();
-        for (Acao acao : listaAcoes) {
-            acao.setDriver(driver);
-            teste.adicionar(acao);
-        }
-        teste.executar();
-
         try {
+            Acao teste = new AcaoVazia();
+            for (Acao acao : listaAcoes) {
+                acao.setDriver(driver);
+                teste.adicionar(acao);
+            }
+            teste.executar();
+
+
             Thread.sleep(10000);
-        }catch (InterruptedException ex){
+
+        }catch (InterruptedException ex) {
             ex.printStackTrace();
+
+            teardown();
         }
 
         System.out.println("\nFIM");

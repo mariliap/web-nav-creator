@@ -1,5 +1,7 @@
 package rest;
 
+import util.PathEnum;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -17,7 +19,7 @@ public class VersionUpdateResource implements Serializable{
         String localVersion = "";
 
         try {
-            properties.load(this.getClass().getResourceAsStream("/main/resources/version.properties"));
+            properties.load(this.getClass().getClassLoader().getResourceAsStream(PathEnum.VERSION_POPERTIES.getPath()));
             localVersion = properties.getProperty("version");
         } catch (Exception ex) {
             localVersion="ERROR";

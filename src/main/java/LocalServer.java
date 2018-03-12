@@ -8,6 +8,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 import rest.RestConfiguration;
+import util.PathEnum;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,9 +23,7 @@ import java.util.logging.Logger;
 public class LocalServer {
 
 
-    private static final String WEBROOT_INDEX = "/webapp/";
 
-    private static final String REST_API_INDEX = "/rest/";
     private static final Logger LOG = Logger.getLogger(Main.class.getName());
 
     private int address;
@@ -89,10 +88,11 @@ public class LocalServer {
 
     private URI getWebRootResourceUri() throws FileNotFoundException, URISyntaxException
     {
-        URL indexUri = this.getClass().getResource(WEBROOT_INDEX);
+
+        URL indexUri = this.getClass().getResource(PathEnum.WEBROOT_INDEX.getPath());
         if (indexUri == null)
         {
-            throw new FileNotFoundException("Unable to find resource " + WEBROOT_INDEX);
+            throw new FileNotFoundException("Unable to find resource " + PathEnum.WEBROOT_INDEX.getPath());
         }
 
         return indexUri.toURI();
@@ -101,10 +101,10 @@ public class LocalServer {
     private URI getRestApiResourceUri() throws FileNotFoundException, URISyntaxException
     {
 
-        URL indexUri = this.getClass().getResource(REST_API_INDEX);
+        URL indexUri = this.getClass().getResource(PathEnum.REST_API_INDEX.getPath());
         if (indexUri == null)
         {
-            throw new FileNotFoundException("Unable to find resource " + REST_API_INDEX);
+            throw new FileNotFoundException("Unable to find resource " + PathEnum.REST_API_INDEX.getPath());
         }
 
         return indexUri.toURI();
@@ -112,6 +112,9 @@ public class LocalServer {
 
     private WebAppContext getWebAppContext(URI baseUri, File scratchDir)
     {
+//        String rootPath = LocalServer.class.getClassLoader().getResource(".").toString();
+//        WebAppContext context = new WebAppContext(rootPath + "../../src/main/webapp", "");
+
         WebAppContext context = new WebAppContext();
         context.setContextPath("/ui");
         //context.setAttribute("javax.servlet.context.tempdir", scratchDir);

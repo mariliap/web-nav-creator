@@ -2,6 +2,7 @@ import acoesBasics.Acao;
 import acoesBasics.AcaoVazia;
 import acoesVisitors.PaginaAcoesVisitor;
 import elementos.Elemento;
+import util.PathEnum;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,23 +12,26 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URI;
-import java.util.*;
+import java.util.Properties;
 
 /**
  * Created by Marilia on 07/02/2018.
  */
 public class Main {
 
+    //http://localhost:8080/web-nav-creator/
+
+
     public static void main(String[] args) {
         System.out.println("Hello World!");
 
-        //initServer();
+        initServer();
 
-        ChromeTest.setupClass();
-        ChromeTest test = new ChromeTest();
-        test.setupTest();
-        test.test();
-        test.teardown();
+//        ChromeTest.setupClass();
+//        ChromeTest test = new ChromeTest();
+//        test.setupTest();
+//        test.test();
+//        test.teardown();
 
 
 
@@ -37,7 +41,8 @@ public class Main {
     public static void initServer(){
         try{
             Properties properties = new Properties();
-            properties.load(UpdateApp.class.getResourceAsStream("/main/resources/server.properties"));
+            properties.load(Main.class.getClassLoader().getResourceAsStream(PathEnum.SERVER_POPERTIES.getPath()));
+            //properties.load(Main.class.getClassLoader().getResourceAsStream("/main/resources/server.properties"));
 
             initMockRemoteServer(properties);
 
