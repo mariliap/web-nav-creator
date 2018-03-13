@@ -139,14 +139,17 @@
                                  */
                                 boolean isJettyRun = false
                                 List<String> goals = session.getGoals()
+                                String directoryPath = project.getBasedir().getPath()
+                                File directoryFile = new File(directoryPath)
+                                println directoryPath
                                 for (String s : goals)
                                     if (s.equals('jetty:run'))
                                         isJettyRun = true
                                 if (isJettyRun) {
-                                    def proc_webpack = new ProcessBuilder(["node/node", "node_modules/webpack-dev-server/bin/webpack-dev-server.js", "--inline", "--hot", "--stdin", "--port", "9090"]).inheritIO().directory(project.getBasedir()).start()
+                                    def proc_webpack = new ProcessBuilder(["node/node", "node_modules/webpack-dev-server/bin/webpack-dev-server.js", "--inline", "--hot", "--stdin", "--port", "9090", "--content-base", "target/classes/"]).inheritIO().directory(directoryFile).start()
                                 } else {
                                     println "Compiling client code..."
-                                    def webpack = new ProcessBuilder(["node/node", "node_modules/webpack/bin/webpack.js", "-p", "--progress", "--bail"]).inheritIO().directory(project.getBasedir())
+                                    def webpack = new ProcessBuilder(["node/node", "node_modules/webpack/bin/webpack.js", "-p", "--progress", "--bail"]).inheritIO().directory(directoryFile)
                                     def env = webpack.environment()
                                     env.put("WAR_NAME", project.build.finalName)
                                     def proc_webpack = webpack.start()

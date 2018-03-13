@@ -5,7 +5,7 @@ import './Hello.less'
 const Hello = React.createClass({
     render: function() {
         return (
-            <div className="HelloWorld">Good Bye {this.props.who}</div>
+            <div className="HelloWorld">Good bye {this.props.who}</div>
         )
     }
 })

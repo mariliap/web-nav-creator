@@ -17,7 +17,7 @@ var config = {
     devtool: production ? 'cheap-source-map' : 'source-map',
     output: {
         //path: path.resolve(__dirname, 'target/' + process.env.WAR_NAME + '/assets'),
-        path: path.resolve(__dirname, 'target/' + 'classes/' + process.env.WAR_NAME + '/assets'),
+        path: path.resolve(__dirname, 'target/' + 'classes/assets'),
         filename: path.normalize('[name].js'),
     	publicPath: 'assets/'
     },
