@@ -19,6 +19,8 @@ import java.util.Properties;
  */
 public class Main {
 
+    //mvn compile (baixar bibliotecas js do package.json)
+    //mvn jetty:run
     //http://localhost:8080/web-nav-creator/
 
 
