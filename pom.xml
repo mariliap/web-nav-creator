@@ -72,6 +72,21 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        
+        <!-- 
+        	Observação na hora de rodar o mvn install pela primeira vez:
+        	Deve-se colocar todos os plugins dentro do bloco acima de
+        	pluginManagement. Do contrário, o maven não faz o download 
+        	do plugin ou dá erro. Depois disso, antes de executar o
+        	mvn jetty:run, deve-se revertar esta alteração e os plugins 
+        	(com exceção do appassembler-maven-plugin) devem ficar na sessão
+        	plugins fora do bloco pluginManagement.
+        	Ver: https://stackoverflow.com/questions/6352208/how-to-solve-plugin-execution-not-covered-by-lifecycle-configuration-for-sprin
+         
+         	Para rodar o ReactJS com HOt swaping,
+         	Rode o seguinte comando no terminal aberto na pasta deste pom.xml
+         	JAVA_HOME=/home/marilia.lima@CGE/marilia-cge/ferramentas/jdk-8u144-linux-x64/jdk1.8.0_144/ /home/marilia.lima@CGE/marilia-cge/ferramentas/apache-maven-3.5.2/bin/mvn jetty:run
+         -->
 
 
         <plugins>
@@ -141,7 +156,7 @@
                                 List<String> goals = session.getGoals()
                                 String directoryPath = project.getBasedir().getPath()
                                 File directoryFile = new File(directoryPath)
-                                println directoryPath
+                                println "xxx = " + directoryPath
                                 for (String s : goals)
                                     if (s.equals('jetty:run'))
                                         isJettyRun = true
@@ -162,8 +177,9 @@
                     </execution>
                 </executions>
             </plugin>
-        </plugins>
+        	</plugins>
 
+<!-- 		</pluginManagement> -->
     </build>
 
 

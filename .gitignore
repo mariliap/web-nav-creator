@@ -3,6 +3,10 @@
 .idea
 *.iml
 
+.project
+.classpath
+.settings
+
 target
 node
 node_modules

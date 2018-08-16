@@ -1,0 +1,1 @@
+java -cp "/home/marilia.lima@CGE/.m2/repository/org/hsqldb/hsqldb/2.4.0/hsqldb-2.4.0.jar" org.hsqldb.Server -database.0 file:/home/marilia.lima@CGE/marilia-pessoal/marilia-dev/WorkspaceJEE-OFFICE/web-nav-creator/target/database/web-nav-creator-db -dbname.0 web-nav-creator
